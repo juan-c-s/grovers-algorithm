@@ -16,13 +16,13 @@ pip install numpy
 ## Estructura del Proyecto
 El proyecto se compone de las siguientes funciones:
 
-hadamardN(n: int)
-projectOverMedian(N: int)
-phaseInversion(N: int, f: callable)
-normalityCheck(states: np.array)
-grover(n: int, f: callable)
-f(x: int)
-main()
+hadamardN(n: int)\
+projectOverMedian(N: int)\
+phaseInversion(N: int, f: callable)\
+normalityCheck(states: np.array)\
+grover(n: int, f: callable)\
+f(x: int)\
+main()\
 
 ## Descripción de las Funciones
 1. hadamardN(n: int):
