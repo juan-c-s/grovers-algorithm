@@ -22,7 +22,7 @@ phaseInversion(N: int, f: callable)\
 normalityCheck(states: np.array)\
 grover(n: int, f: callable)\
 f(x: int)\
-main()\
+main()
 
 ## Descripción de las Funciones
 1. hadamardN(n: int):
