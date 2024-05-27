@@ -26,43 +26,42 @@ def phaseInversion(N, f : callable):
     for i in range(0,N):
         oracleMatrix[i][i] = ((-1) ** f(i))
     oracleMatrix = np.kron(np.eye(2), oracleMatrix)
-    for i in range(N, N*2):
-        oracleMatrix[i][i] = 1
     return oracleMatrix
 
 def normalityCheck(states):
     sum = 0
     for x in states[0]:
         sum += x*x
-    print(sum)
+    # print(sum)
     assert(sum <= 1.1 and sum >= 0.9)
 
 
 def grover(n : int, f : callable):
     N = 2**(n+1)
     # iterations = 1
-    iterations = math.pi / 4.0 * math.sqrt(N)
+    iterations = math.ceil(math.pi / 4.0 * math.sqrt(N))
     states = np.full((1,2**n), 0)
     states[0][0] = 1
     one = np.full((1,2), 0)
     one[0][1] = 1
     states = np.kron(one, states)# Inicializar en | - >
-    # print(states)
+    print("Initial State: ",states[0])
     hadamardMatrix = hadamardN(n)
     phaseInversionMatrix = phaseInversion(2**n, f)
     meanInversionMatrix = projectOverMedian(2**n)
     # print(phaseInversionMatrix)
     states = states @ hadamardMatrix
     # print(states)
-
-    for _ in range(math.ceil(iterations)):
+    print("iterations", iterations)
+    for _ in range(iterations):
+        normalityCheck(states)
         states = states@phaseInversionMatrix
 
         states = states@hadamardMatrix
         states = states@meanInversionMatrix
         states = states@hadamardMatrix
 
-    return states[:,: N//2]
+    return states
 
 def f(x : int):
     return 1 if x == 0 else 0
